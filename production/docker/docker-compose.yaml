@@ -73,6 +73,7 @@ services:
     volumes:
       - ./loki/:/var/log/
       - ./config:/etc/promtail/
+      - /var/run/docker.sock:/var/run/docker.sock:ro  # 添加Docker socket
     ports:
       - 9080
     command: -config.file=/etc/promtail/promtail.yaml
