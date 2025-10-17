@@ -89,7 +89,7 @@ services:
       - |
         mkdir -p /data/loki-data && \
         mkdir -p /data/loki-ruler &&
-        minio server --address "0.0.0.0:9000" --console-address "0.0.0.0:9001" /data
+        minio server --address "0.0.0.0:9003" --console-address "0.0.0.0:9001" /data
     environment:
       - MINIO_ROOT_USER=loki
       - MINIO_ROOT_PASSWORD=supersecret
