@@ -16,9 +16,7 @@ scrape_configs:
     docker_sd_configs:
       - host: unix:///var/run/docker.sock    # Docker socket路径
         refresh_interval: 5s                 # 5秒刷新一次容器列表
-        filters:                             # 过滤器
-          - name: label
-            values: ["logging=promtail"]      # 只采集带此标签的容器
+        # 移除过滤器，采集所有容器
     relabel_configs:
       # 重标记配置
       - source_labels: ['__meta_docker_container_name']
