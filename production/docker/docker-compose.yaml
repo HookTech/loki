@@ -97,7 +97,7 @@ services:
       - MINIO_PROMETHEUS_AUTH_TYPE=public
       - MINIO_UPDATE=off
     ports:
-      - "9000:9000"
+      - "9003:9000"  # host 9003 -> container 9000 (Loki uses 9000 inside)
       - "9001:9001"
     volumes:
       - ./.data/minio:/data
