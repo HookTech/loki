@@ -17,6 +17,9 @@ scrape_configs:
       - host: unix:///var/run/docker.sock    # Docker socket路径
         refresh_interval: 5s                 # 5秒刷新一次容器列表
     relabel_configs:
+      # 固定添加 job 标签
+      - target_label: 'job'
+        replacement: 'docker'
       - source_labels: ['__meta_docker_container_name']
         target_label: 'container_name'
       - source_labels: ['__meta_docker_container_log_stream']
@@ -33,8 +36,6 @@ scrape_configs:
           container_name:
           service:
           project:
-    labels:
-      job: docker
 
   # 保留原有的生成器日志采集
   - job_name: generated-logs
