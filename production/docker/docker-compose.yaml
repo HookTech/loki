@@ -76,7 +76,7 @@ services:
       - ./config:/etc/promtail/
       - /var/run/docker.sock:/var/run/docker.sock:ro  # 添加Docker socket
     ports:
-      - 9080
+      - "9080:9080"
     command: -config.file=/etc/promtail/promtail-docker.yaml
     networks:
       - loki
@@ -89,14 +89,15 @@ services:
       - |
         mkdir -p /data/loki-data && \
         mkdir -p /data/loki-ruler &&
-        minio server --address "0.0.0.0:9003" --console-address "0.0.0.0:9001" /data
+        # Use standard S3 port 9000 inside container to match Loki endpoint
+        minio server --address "0.0.0.0:9000" --console-address "0.0.0.0:9001" /data
     environment:
       - MINIO_ROOT_USER=loki
       - MINIO_ROOT_PASSWORD=supersecret
       - MINIO_PROMETHEUS_AUTH_TYPE=public
       - MINIO_UPDATE=off
     ports:
-      - "9003:9000"
+      - "9000:9000"
       - "9001:9001"
     volumes:
       - ./.data/minio:/data

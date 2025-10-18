@@ -16,9 +16,7 @@ scrape_configs:
     docker_sd_configs:
       - host: unix:///var/run/docker.sock    # Docker socket路径
         refresh_interval: 5s                 # 5秒刷新一次容器列表
-        # 移除过滤器，采集所有容器
     relabel_configs:
-      # 重标记配置
       - source_labels: ['__meta_docker_container_name']
         target_label: 'container_name'
       - source_labels: ['__meta_docker_container_log_stream']
@@ -28,15 +26,8 @@ scrape_configs:
       - source_labels: ['__meta_docker_container_label_com_docker_compose_project']
         target_label: 'project'
     pipeline_stages:
-      # 日志处理管道
-      - json:
-          expressions:
-            output: 'output'
-            stream: 'stream'
-            timestamp: 'timestamp'
-      - timestamp:
-          source: timestamp
-          format: RFC3339Nano
+      # 直接解析 Docker 默认 json-file 格式，更稳健
+      - docker: {}
       - labels:
           stream:
           container_name:
