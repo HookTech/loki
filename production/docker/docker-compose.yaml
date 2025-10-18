@@ -77,7 +77,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro  # 添加Docker socket
     ports:
       - 9080
-    command: -config.file=/etc/promtail/promtail.yaml
+    command: -config.file=/etc/promtail/promtail-docker.yaml
     networks:
       - loki
 
