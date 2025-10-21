@@ -139,11 +139,11 @@ query_scheduler:
   max_outstanding_requests_per_tenant: 1024
 
 querier:
-  query_ingesters_within: 2h
+  query_ingesters_within: 72h
 
 compactor:
   working_directory: /tmp/compactor
   # Enable time-based retention for TSDB blocks
-  retention_enabled: true
+  # retention_enabled: true
   # How often to apply retention policies
-  apply_retention_interval: 5m
+  # apply_retention_interval: 5m
