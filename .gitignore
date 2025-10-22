@@ -75,3 +75,4 @@ mem.prof
 
 **/.claude/settings.local.json
 *.log
+*.md
