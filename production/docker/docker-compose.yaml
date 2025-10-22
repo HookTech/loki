@@ -110,7 +110,7 @@ services:
       - ./config/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - "8080:80"
-      - "3100"
+      - "3100:3100"
     networks:
       - loki
 
@@ -123,11 +123,9 @@ services:
     #   - SYS_PTRACE
     # security_opt:
     #   - apparmor=unconfined
-    ports:
-      - "3100"
-      - "7946"
-      # uncomment to use interactive debugging
-      # - "40000-40002:40000" # makes the replicas available on ports 40000, 40001, 40002
+    # internal only; do not publish random host ports
+    # uncomment to use interactive debugging
+    # - "40000-40002:40000" # makes the replicas available on ports 40000, 40001, 40002
     command: "-config.file=/etc/loki/loki.yaml -target=read -legacy-read-mode=false"
     networks:
       - loki
@@ -145,11 +143,9 @@ services:
     #   - SYS_PTRACE
     # security_opt:
     #   - apparmor=unconfined
-    ports:
-      - "3100"
-      - "7946"
-      # uncomment to use interactive debugging
-      # - "50000-50002:40000" #  makes the replicas available on ports 50000, 50001, 50002
+    # internal only; do not publish random host ports
+    # uncomment to use interactive debugging
+    # - "50000-50002:40000" #  makes the replicas available on ports 50000, 50001, 50002
     command: "-config.file=/etc/loki/loki.yaml -target=write"
     networks:
       - loki
@@ -168,11 +164,9 @@ services:
     #   - SYS_PTRACE
     # security_opt:
     #   - apparmor=unconfined
-    ports:
-      - "3100"
-      - "7946"
-      # uncomment to use interactive debugging
-      # - "60000-60002:40000" #  makes the replicas available on ports 60000, 60001, 60002
+    # internal only; do not publish random host ports
+    # uncomment to use interactive debugging
+    # - "60000-60002:40000" #  makes the replicas available on ports 60000, 60001, 60002
     command: "-config.file=/etc/loki/loki.yaml -target=backend -legacy-read-mode=false"
     networks:
       - loki
