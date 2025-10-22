@@ -144,6 +144,6 @@ querier:
 compactor:
   working_directory: /tmp/compactor
   # Enable time-based retention for TSDB blocks
-  # retention_enabled: true
+  retention_enabled: true
   # How often to apply retention policies
-  # apply_retention_interval: 5m
+  apply_retention_interval: 10m
