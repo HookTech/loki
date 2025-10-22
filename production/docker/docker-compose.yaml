@@ -77,6 +77,8 @@ services:
       - ./data/promtail:/var/lib/promtail
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro  # 添加Docker socket
+      # CRS 文件日志目录（宿主机路径）只读挂载，便于 promtail 读取
+      - /opt/aicoding/crs/logs:/opt/aicoding/crs/logs:ro
     ports:
       - "9080:9080"
     command: -config.file=/etc/promtail/promtail-docker.yaml
