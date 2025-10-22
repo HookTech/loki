@@ -74,6 +74,8 @@ services:
     volumes:
       - ./loki/:/var/log/
       - ./config:/etc/promtail/
+      - ./data/promtail:/var/lib/promtail
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro  # 添加Docker socket
     ports:
       - "9080:9080"

@@ -4,7 +4,7 @@ server:
     log_level: "info"
 
 positions:
-    filename: /tmp/positions.yaml
+    filename: /var/lib/promtail/positions.yaml
 
 clients:
     - url: http://loki-gateway:80/loki/api/v1/push
@@ -17,6 +17,10 @@ scrape_configs:
       - host: unix:///var/run/docker.sock    # Docker socket路径
         refresh_interval: 5s                 # 5秒刷新一次容器列表
     relabel_configs:
+      # 将容器日志文件路径映射到 __path__，让 promtail 直接跟随 json-file 日志
+      - action: replace
+        source_labels: ['__meta_docker_container_log_path']
+        target_label: '__path__'
       # 固定添加 job 标签（使用 replace + source 以确保生效）
       - action: replace
         source_labels: ['__meta_docker_container_id']
