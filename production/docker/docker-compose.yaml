@@ -134,9 +134,11 @@ services:
     networks:
       - loki
     restart: always
+    mem_limit: 1g
+    mem_reservation: 512m
     deploy:
       mode: replicated
-      replicas: 3
+      replicas: 1
 
   loki-write:
     image: *lokiImage
@@ -154,9 +156,11 @@ services:
     networks:
       - loki
     restart: always
+    mem_limit: 1g
+    mem_reservation: 512m
     deploy:
       mode: replicated
-      replicas: 3
+      replicas: 1
 
   loki-backend:
     image: *lokiImage
@@ -175,9 +179,11 @@ services:
     networks:
       - loki
     restart: always
+    mem_limit: 1g
+    mem_reservation: 512m
     deploy:
       mode: replicated
-      replicas: 3
+      replicas: 1
 
   # alertmanager to enable receiving alerts
   alertmanager:

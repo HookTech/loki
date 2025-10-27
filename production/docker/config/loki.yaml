@@ -10,7 +10,7 @@ server:
 common:
   path_prefix: /loki
   compactor_address: http://loki-backend:3100
-  replication_factor: 3
+  replication_factor: 1
 
 storage_config:
   aws:
@@ -35,7 +35,7 @@ ingester:
     join_after: 10s
     observe_period: 5s
     ring:
-      replication_factor: 3
+      replication_factor: 1
       kvstore:
         store: memberlist
     final_sleep: 0s
@@ -147,3 +147,7 @@ compactor:
   retention_enabled: true
   # How often to apply retention policies
   apply_retention_interval: 10m
+  # Required when retention/delete API is enabled. Use the same
+  # object store name as in schema_config.configs[*].object_store
+  # and storage_config (here we use S3/MinIO).
+  delete_request_store: s3
