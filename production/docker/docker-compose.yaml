@@ -154,9 +154,15 @@ services:
     command: "-config.file=/etc/loki/loki.yaml -target=write"
     networks:
       - loki
+    environment:
+      # Soft memory guard for Go runtime to avoid hitting container hard limit
+      # Tune alongside mem_limit. With mem_limit=2g, keep ~85% here.
+      GOMEMLIMIT: "1700MiB"
+      GOGC: "100"
+      MALLOC_ARENA_MAX: "2"
     restart: always
-    mem_limit: 1g
-    mem_reservation: 512m
+    mem_limit: 2g
+    mem_reservation: 1g
     deploy:
       mode: replicated
       replicas: 1
