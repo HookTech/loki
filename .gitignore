@@ -76,3 +76,6 @@ mem.prof
 **/.claude/settings.local.json
 *.log
 *.md
+daodao_full_backup.sql
+dump_mysql.sh
+aicoding-dashboard-with-uid.json
