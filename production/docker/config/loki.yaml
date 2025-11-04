@@ -54,10 +54,6 @@ ingester:
   chunk_target_size: 1.572864e+06
   chunk_block_size: 262144
   flush_op_timeout: 60s
-  flush_op_backoff:
-    min_backoff: 5s
-    max_backoff: 1m
-    max_retries: 12
 
 ruler:
   enable_api: true
