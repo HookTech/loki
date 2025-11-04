@@ -48,7 +48,8 @@ ingester:
   wal:
     enabled: true
     dir: /loki/wal
-  max_chunk_age: 1m
+  # Increase max_chunk_age to widen out-of-order acceptance window (1/2 of this)
+  max_chunk_age: 2h
   chunk_retain_period: 30s
   chunk_encoding: snappy
   chunk_target_size: 1.572864e+06
@@ -114,7 +115,8 @@ schema_config:
 limits_config:
   max_cache_freshness_per_query: '10m'
   reject_old_samples: true
-  reject_old_samples_max_age: 30m
+  # Allow ingestion of backfilled/late logs up to 7d old (align with other production templates)
+  reject_old_samples_max_age: 168h
   ingestion_rate_mb: 10
   ingestion_burst_size_mb: 20
   max_entries_limit_per_query: 50000
