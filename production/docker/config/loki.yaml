@@ -116,7 +116,7 @@ limits_config:
   max_cache_freshness_per_query: '10m'
   reject_old_samples: true
   # Allow ingestion of backfilled/late logs up to 60 minutes old (align with other production templates)
-  reject_old_samples_max_age: 60m
+  reject_old_samples_max_age: 720h
   ingestion_rate_mb: 10
   ingestion_burst_size_mb: 20
   max_entries_limit_per_query: 50000
