@@ -32,13 +32,18 @@ memberlist:
 
 ingester:
   lifecycler:
+    id: loki-write
+    address: loki-write
     join_after: 10s
     observe_period: 5s
     ring:
       replication_factor: 1
       kvstore:
         store: memberlist
+      heartbeat_timeout: 1m
     final_sleep: 0s
+  autoforget_unhealthy: true
+  concurrent_flushes: 8
   chunk_idle_period: 1m
   wal:
     enabled: true
@@ -48,7 +53,11 @@ ingester:
   chunk_encoding: snappy
   chunk_target_size: 1.572864e+06
   chunk_block_size: 262144
-  flush_op_timeout: 10s
+  flush_op_timeout: 60s
+  flush_op_backoff:
+    min_backoff: 5s
+    max_backoff: 1m
+    max_retries: 12
 
 ruler:
   enable_api: true
