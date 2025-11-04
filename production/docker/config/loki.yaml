@@ -49,7 +49,7 @@ ingester:
     enabled: true
     dir: /loki/wal
   # Increase max_chunk_age to widen out-of-order acceptance window (1/2 of this)
-  max_chunk_age: 2h
+  max_chunk_age: 1m
   chunk_retain_period: 30s
   chunk_encoding: snappy
   chunk_target_size: 1.572864e+06
